@@ -1,0 +1,82 @@
+﻿<Window x:Class="Prototype.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prototype"
+        mc:Ignorable="d"
+        Title="Linear Regression" Height="450" Width="800" Background="White" Foreground="White">
+    <Window.Resources>
+        <Image x:Key="AddRow" Source="Resources/AddRow.png"/>
+        <Image x:Key="AddColumn" Source="Resources/AddColumn.png"/>
+        <Image x:Key="HideColumn" Source="Resources/HideColumn.png"/>
+        <Image x:Key="RemoveRow" Source="Resources/DeleteRow.png"/>
+        <Image x:Key="RemoveColumn" Source="Resources/RemoveColumn.png"/>
+        <Image x:Key="ShowColumns" Source="Resources/ShowColumns.png"/>
+    </Window.Resources>
+    <Grid ShowGridLines="False">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="21"/>
+            <RowDefinition Height="33"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <Menu x:Name="menu" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Background="White" Foreground="Black" Margin="0,0,-0.4,20.6" Grid.RowSpan="3">
+            <MenuItem Header="Файл">
+                <MenuItem Header="Открыть">
+                    <MenuItem Header="Обучающие примеры" Click="OpenTrain_Click"/>
+                    <MenuItem Header="Рассчитанные коэффициенты" Click="OpenLearn_Click"/>
+                </MenuItem>
+                <MenuItem Header="Сохранить">
+                    <MenuItem Header="Обучающие примеры" Click="SaveTrain_Click"/>
+                    <MenuItem Header="Рассчитанные коэффициенты" Click="SaveLearn_Click"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="Предсказать">
+                <MenuItem Header="Параметр" Click="CalculateParameter_Click"/>
+                <MenuItem Header="Результат" Click="CalculateResult_Click"/>
+            </MenuItem>
+            <MenuItem Header="Обучить">
+                <MenuItem Header="Рассчитать коэффициенты" Click="Train_Click"/>
+            </MenuItem>
+            <MenuItem Header="Сортировка">
+                <MenuItem Header="По стандартизованным коэффициентам">
+                    <MenuItem Header="По возрастанию" x:Name="StandInc" Click="Sort_Click"/>
+                    <MenuItem Header="По убыванию" x:Name="StandDec" Click="Sort_Click"/>
+                </MenuItem>
+                <MenuItem Header="По коэффициентам">
+                    <MenuItem Header="По возрастанию" x:Name="UsualInc" Click="Sort_Click"/>
+                    <MenuItem Header="По убыванию" x:Name="UsualDec" Click="Sort_Click"/>
+                </MenuItem>
+            </MenuItem>
+        </Menu>
+        <ToolBar Grid.Row="1">
+            <Button Content="{StaticResource AddRow}" Click="AddRow_Click" />
+            <Button Content="{StaticResource AddColumn}" Margin="5 0 0 0" Click="AddColumn_Click"/>
+            <Button Content="{StaticResource HideColumn}" Margin="5 0 0 0" Click="HideRow_Click"/>
+            <Button Content="{StaticResource RemoveRow}" Margin="5 0 0 0" Click="RemoveRow_Click"/>
+            <Button Content="{StaticResource RemoveColumn}" Margin="5 0 0 0" Click="RemoveColumn_Click"/>
+            <Button Content="{StaticResource ShowColumns}" Margin="5 0 0 0" Click="ShowHidden_Click"/>
+        </ToolBar>
+        <DataGrid x:Name = "TrainGrid" Grid.Row="2"  AutoGenerateColumns="False" 
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserSortColumns="False" 
+                  CanUserReorderColumns="False">
+            <!--CanUserResizeRows="True"-->
+        </DataGrid>
+        <GridSplitter Grid.Row="3" ShowsPreview="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Height="5"/>
+        <DataGrid x:Name="CoefGrid" Grid.Row="4" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Наименование" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Коэффициент" Binding="{Binding Path=Coef}"/>
+                <DataGridTextColumn Header="Стандартизованный коэффициент" Binding="{Binding Path=StandCoef}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <WrapPanel Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+            <TextBlock Foreground="Black">Коэффициент детерминации:</TextBlock>
+            <TextBlock Foreground="Black" x:Name="CoefficentOfDetermination" Margin="10 0 0 0"></TextBlock>
+        </WrapPanel>
+    </Grid>
+</Window>

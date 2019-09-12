@@ -1,0 +1,21 @@
+﻿<Window x:Class="Prototype.HiddenColumnsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Prototype"
+        mc:Ignorable="d"
+        Title="HiddenColumnsWindow" Height="450" Width="800">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <ListBox x:Name="HiddenColumns" Grid.Row="0" SelectionMode="Multiple"/>
+        <WrapPanel Grid.Row="1" HorizontalAlignment="Right">
+            <Button Content ="ОК" MinWidth="60" MinHeight="10" Margin="0 10 10 0" Click="Accept_Click"/>
+            <Button Content="Выбрать все" MinWidth="60" MinHeight="10" Margin="0 10 10 0" Click="SelectAll_Click"/>
+            <Button IsCancel="True" Content ="Отмена" MinWidth="60" MinHeight="10" Margin="0 10 10 0"/>
+        </WrapPanel>
+    </Grid>
+</Window>
